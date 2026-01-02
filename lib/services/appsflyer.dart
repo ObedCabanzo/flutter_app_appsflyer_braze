@@ -140,18 +140,7 @@ class AppsFlyerService {
   }
 
   void _setupDeepLinkListeners() {
-    MethodChannel('deepLinkChannel').setMethodCallHandler((call) async {
-      if (call.method == 'receivedDeepLink') {
-        final String uri = call.arguments;
-        _log('Deep link recibido desde Method Channel: $uri');
-        final deepLink = DeepLinkData(
-          deepLinkValue: uri,
-          isDeferred: false,
-          rawLink: uri,
-        );
-        _handleDeepLink(deepLink);
-      }
-    });
+    
     // Conversion Data (datos de instalación/atribución)
     _appsflyerSdk!.onInstallConversionData((data) {
       _log('Conversion Data recibido: $data');
