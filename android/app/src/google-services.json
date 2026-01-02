@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1079292218864",
+    "project_id": "flutter-appsflyer-6d0c5",
+    "storage_bucket": "flutter-appsflyer-6d0c5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1079292218864:android:cb656b4bff8d8e799f2135",
+        "android_client_info": {
+          "package_name": "com.example.flutter_app_appsflyer_braze"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfld1ZbCdefM1NxDaRJOEJiYLL1nwUw3g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

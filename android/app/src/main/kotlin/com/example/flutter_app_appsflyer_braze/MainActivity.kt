@@ -1,0 +1,30 @@
+package com.example.flutter_app_appsflyer_braze
+
+import android.content.Intent
+import android.os.Bundle
+import io.flutter.embedding.android.FlutterActivity
+import com.appsflyer.AppsFlyerLib
+
+class MainActivity : FlutterActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        handleDeepLink(intent)
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        handleDeepLink(intent)
+    }
+
+    private fun handleDeepLink(intent: Intent?) {
+        intent?.let {
+            if (it.action == Intent.ACTION_VIEW && it.data != null) {
+                // Esto hace que AppsFlyer resuelva el short link
+                // y dispare el callback onDeepLinking en Flutter
+                AppsFlyerLib.getInstance().performOnDeepLinking(it, this)
+            }
+        }
+    }
+}
