@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_appsflyer_braze/services/braze_service.dart';
 import 'package:flutter_app_appsflyer_braze/services/appsflyer.dart';
+import 'package:flutter_app_appsflyer_braze/services/identifiers.dart';
+import 'package:flutter_app_appsflyer_braze/services/singular_service.dart';
 import 'dart:io';
 
 
@@ -16,28 +18,31 @@ String getUserIdWithPlatform(String baseId) {
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  obtenerIDFV();
   // Initialize Braze
   await BrazeService.instance.init();
   BrazeService.instance.setUserId(getUserIdWithPlatform('usuario_test'));
 
-  // Initialize AppsFlyer con OneLink
-  await AppsFlyerService.instance.initialize(
-    devKey: "KhuJ4YG8vRPQ9ZswK6uYwe",
-    appId: "6756940145", // iOS App Store ID
-    isDebug: true,
-    oneLinkID:
-        "flutter-appsflyer-braze", // Tu OneLink template ID (ej: si tu link es tuapp.onelink.me)
-    domains: ['flutter-appsflyer-braze.onelink.me'],
-  );
+  // // Initialize AppsFlyer con OneLink
+  // await AppsFlyerService.instance.initialize(
+  //   devKey: "KhuJ4YG8vRPQ9ZswK6uYwe",
+  //   appId: "6756940145", // iOS App Store ID
+  //   isDebug: true,
+  //   oneLinkID:
+  //       "flutter-appsflyer-braze", // Tu OneLink template ID (ej: si tu link es tuapp.onelink.me)
+  //   domains: ['flutter-appsflyer-braze.onelink.me'],
+  // );
 
-  // Obtener AppsFlyer UID
-  final afId = await AppsFlyerService.instance.getAppsFlyerUID();
-  print("AppsFlyer ID: $afId");
+  // // Obtener AppsFlyer UID
+  // final afId = await AppsFlyerService.instance.getAppsFlyerUID();
+  // print("AppsFlyer ID: $afId");
 
-  // Set user ID consistente
-  AppsFlyerService.instance.setCustomerUserId(
-    getUserIdWithPlatform('usuario_test'),
-  );
+  // // Set user ID consistente
+  // AppsFlyerService.instance.setCustomerUserId(
+  //   getUserIdWithPlatform('usuario_test'),
+  // );
+
+  SingularService.initializeSingularSDK(getUserIdWithPlatform('usuario_test'));
 
   runApp(const MyApp());
 }
@@ -137,10 +142,12 @@ class _MyHomePageState extends State<MyHomePage> {
     });
 
     // Ejemplo: trackear evento
-    AppsFlyerService.instance.logEvent('button_click', {
-      'button_name': 'increment',
-      'counter_value': _counter,
-    });
+    // AppsFlyerService.instance.logEvent('button_click', {
+    //   'button_name': 'increment',
+    //   'counter_value': _counter,R
+    // });
+
+    SingularService.trackEvent("button_click");
   }
 
   @override

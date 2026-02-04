@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import io.flutter.embedding.android.FlutterActivity
 import com.appsflyer.AppsFlyerLib
+import com.singular.flutter_sdk.SingularBridge;
 
 class MainActivity : FlutterActivity() {
 
@@ -19,12 +20,6 @@ class MainActivity : FlutterActivity() {
     }
 
     private fun handleDeepLink(intent: Intent?) {
-        intent?.let {
-            if (it.action == Intent.ACTION_VIEW && it.data != null) {
-                // Esto hace que AppsFlyer resuelva el short link
-                // y dispare el callback onDeepLinking en Flutter
-                AppsFlyerLib.getInstance().performOnDeepLinking(it, this)
-            }
-        }
+        SingularBridge.onNewIntent(intent);
     }
 }

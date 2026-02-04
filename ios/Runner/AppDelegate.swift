@@ -1,3 +1,4 @@
+// AppDelegate FINAL
 import AppsFlyerLib
 import BrazeKit
 import BrazeUI
@@ -5,6 +6,7 @@ import Flutter
 import UIKit
 import UserNotifications
 import braze_plugin
+import singular_flutter_sdk
 
 @main
 @objc class AppDelegate: FlutterAppDelegate, BrazeInAppMessageUIDelegate, BrazeDelegate {
@@ -37,10 +39,6 @@ import braze_plugin
       presenter.delegate = self
     }
 
-    // --- Setup AppsFlyer ---
-    AppsFlyerLib.shared().appsFlyerDevKey = "KhuJ4YG8vRPQ9ZswK6uYwe"
-    AppsFlyerLib.shared().appleAppID = "6756940145"
-    AppsFlyerLib.shared().waitForATTUserAuthorization(timeoutInterval: 60)
 
     // --- Notification Authorization ---
     application.registerForRemoteNotifications()
@@ -59,6 +57,12 @@ import braze_plugin
       BrazePlugin.processPushEvent(payload)
     }
 
+    // --- Setup Singular ---
+
+    if let singularAppDelegate = SingularAppDelegate.shared() {
+      singularAppDelegate.launchOptions = launchOptions
+    }
+
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 
@@ -72,7 +76,9 @@ import braze_plugin
 
     if urlString.contains("onelink.me") {
       print("=> [BrazeDelegate] Intercepting OneLink")
-      AppsFlyerLib.shared().handleOpen(url)
+      if let singularAppDelegate = SingularAppDelegate.shared() {
+        singularAppDelegate.handleOpen(url, options: [:])
+      }
       return false
     }
 
@@ -96,7 +102,10 @@ import braze_plugin
     options: [UIApplication.OpenURLOptionsKey: Any] = [:]
   ) -> Bool {
     print("=> [URL Scheme] Received: \(url.absoluteString)")
-    AppsFlyerLib.shared().handleOpen(url, options: options)
+    //AppsFlyerLib.shared().handleOpen(url, options: options)
+    if let singularAppDelegate = SingularAppDelegate.shared() {
+      singularAppDelegate.handleOpen(url, options: options)
+    }
     return true
   }
 
@@ -108,12 +117,18 @@ import braze_plugin
     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void
   ) -> Bool {
     if userActivity.activityType == NSUserActivityTypeBrowsingWeb,
-       let url = userActivity.webpageURL {
+      let url = userActivity.webpageURL
+    {
       print("=> [Universal Link] URL: \(url.absoluteString)")
-      AppsFlyerLib.shared().continue(userActivity, restorationHandler: nil)
+      if let singularAppDelegate = SingularAppDelegate.shared() {
+            singularAppDelegate.continueUserActivity(userActivity, restorationHandler:nil)
+        }
+      // AppsFlyerLib.shared().continue(userActivity, restorationHandler: nil)
       return true
     }
-    return super.application(application, continue: userActivity, restorationHandler: restorationHandler)
+    
+    return super.application(
+      application, continue: userActivity, restorationHandler: restorationHandler)
   }
 
   // MARK: - Push Notification Tap
@@ -128,9 +143,9 @@ import braze_plugin
 
     // Extraer deep link del payload
     let deepLink = extractDeepLink(from: userInfo)
-    
+
     if let link = deepLink, let url = URL(string: link) {
-      AppsFlyerLib.shared().handleOpen(url)
+      SingularAppDelegate.shared()?.handleOpen(url, options: [:])
     }
 
     completionHandler()

@@ -37,7 +37,9 @@ dependencies:
   braze_plugin: ^16.0.0
   permission_handler: ^12.0.1
   appsflyer_sdk: ^6.17.7+1
-  app_links: ^6.4.1
+  #app_links: ^6.4.1
+  singular_flutter_sdk: ^1.8.0
+  device_info_plus: ^12.3.0
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,4 @@
 PODS:
-  - app_links (6.4.1):
-    - Flutter
   - appsflyer_sdk (6.17.7):
     - appsflyer_sdk/Core (= 6.17.7)
   - appsflyer_sdk/Core (6.17.7):
@@ -19,16 +17,25 @@ PODS:
     - BrazeKit (= 13.3.0)
   - BrazeUI (13.3.0):
     - BrazeKit (= 13.3.0)
+  - device_info_plus (0.0.1):
+    - Flutter
   - Flutter (1.0.0)
   - permission_handler_apple (9.3.0):
     - Flutter
+  - Singular-SDK (12.8.1):
+    - Singular-SDK/Main (= 12.8.1)
+  - Singular-SDK/Main (12.8.1)
+  - singular_flutter_sdk (1.8.0):
+    - Flutter
+    - Singular-SDK (= 12.8.1)
 
 DEPENDENCIES:
-  - app_links (from `.symlinks/plugins/app_links/ios`)
   - appsflyer_sdk (from `.symlinks/plugins/appsflyer_sdk/ios`)
   - braze_plugin (from `.symlinks/plugins/braze_plugin/ios`)
+  - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - Flutter (from `Flutter`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
+  - singular_flutter_sdk (from `.symlinks/plugins/singular_flutter_sdk/ios`)
 
 SPEC REPOS:
   trunk:
@@ -36,29 +43,34 @@ SPEC REPOS:
     - BrazeKit
     - BrazeLocation
     - BrazeUI
+    - Singular-SDK
 
 EXTERNAL SOURCES:
-  app_links:
-    :path: ".symlinks/plugins/app_links/ios"
   appsflyer_sdk:
     :path: ".symlinks/plugins/appsflyer_sdk/ios"
   braze_plugin:
     :path: ".symlinks/plugins/braze_plugin/ios"
+  device_info_plus:
+    :path: ".symlinks/plugins/device_info_plus/ios"
   Flutter:
     :path: Flutter
   permission_handler_apple:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
+  singular_flutter_sdk:
+    :path: ".symlinks/plugins/singular_flutter_sdk/ios"
 
 SPEC CHECKSUMS:
-  app_links: 3dbc685f76b1693c66a6d9dd1e9ab6f73d97dc0a
   appsflyer_sdk: 01d0cd834fe2fffd7f2372ab38690f7483587720
   AppsFlyerFramework: ae7caf1688348f2d7a742037bd4fc6966d39d362
   braze_plugin: cdc1a6aa9835920d289c58cff48ec372f0d68dac
   BrazeKit: 53ac2d77c7d5ab54ab73df75c9058ae89236fc54
   BrazeLocation: 47cde4ac51568718b76d4677475c926ea840633b
   BrazeUI: 4de47810a95f225e0199cf6ddc9756f9dab662eb
+  device_info_plus: 21fcca2080fbcd348be798aa36c3e5ed849eefbe
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
   permission_handler_apple: 4ed2196e43d0651e8ff7ca3483a069d469701f2d
+  Singular-SDK: b270f0151037279a4e65054eb67cb74be6c5892f
+  singular_flutter_sdk: 778cde9231d1245fe730b2f3a1cdf094fe0bd394
 
 PODFILE CHECKSUM: 3c63482e143d1b91d2d2560aee9fb04ecc74ac7e
 

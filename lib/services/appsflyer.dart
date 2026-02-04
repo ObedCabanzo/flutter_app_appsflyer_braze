@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:appsflyer_sdk/appsflyer_sdk.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
 
 /// Datos parseados de un deep link
 class DeepLinkData {
